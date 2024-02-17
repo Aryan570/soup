@@ -19,7 +19,7 @@ const data01 = [
 const Scatter_type = () => {
   return (
     <div>
-      <ScatterChart width={400} height={300}>
+      <ScatterChart width={400} height={300}> 
         <CartesianGrid/>
         <XAxis type='number' dataKey="x"/>
         <YAxis type='number' dataKey="y"/>
