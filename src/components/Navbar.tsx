@@ -1,14 +1,18 @@
 import React from 'react'
-
+import Image from 'next/image'
+import Link from 'next/link'
 const Navbar = () => {
   return (
-    <div className='container shadow-md shadow-rose-300 rounded-full bg-rose-400 my-1'>
-      <div className='flex flex-row p-1 justify-evenly text-white'>
-        <div>Home</div>
-        <div>About</div>
-        <div>Logout</div>
-      </div>
-    </div>
+    <nav className='sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-sm transition-all'>
+     <div className='flex justify-between'>
+        <Image src="/plug.png" width={50} height={50} alt='Soup.' />
+        <div className='flex items-center space-x-2 font-mono font-extralight'>
+          <Link className='hover:bg-gray-200 rounded-lg p-1'  href={'/'}>Overview</Link>
+          <Link className='hover:bg-gray-200 rounded-lg p-1' href={'/'}>Customers</Link>
+          <Link className='hover:bg-gray-200 rounded-lg p-1' href={'/'}>Settngs</Link>
+        </div>
+     </div>
+    </nav>
   )
 }
 
