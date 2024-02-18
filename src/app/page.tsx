@@ -12,10 +12,11 @@ export default function Home() {
   };
 
   return (
-    <>
-    <Navbar/>
-    <Grid_check/>
-    {/* <Graph_test/> */}
-    </>
+    <div className=" min-h-screen h-screen">
+      <Navbar />
+      <div className="container h-5/6 mt-7">
+        <Grid_check />
+      </div>
+    </div>
   );
 }

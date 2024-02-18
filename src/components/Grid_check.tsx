@@ -8,51 +8,52 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
-// import Graph_test from './Graph_test'
 const Grid_check = () => {
   return (
-    <ResizablePanelGroup
-      direction="horizontal"
-      className="max-w-md rounded-lg border"
-    >
-      <ResizablePanel defaultSize={33}>
-        <ResizablePanelGroup direction="vertical">
-          <ResizablePanel defaultSize={50}>
-            <div className="flex h-full items-center justify-center p-6">
-              <span className="font-semibold">Two</span>
-            </div>
-          </ResizablePanel>
-          <ResizableHandle />
-          <ResizablePanel defaultSize={50}>
-            <div className="flex h-full items-center justify-center p-6">
-              <span className="font-semibold">Three</span>
-            </div>
-          </ResizablePanel>
-        </ResizablePanelGroup>
-      </ResizablePanel>
-      <ResizableHandle /> 
-      <ResizablePanel defaultSize={33}>
-        <ResizablePanelGroup direction="vertical">
-          <ResizablePanel defaultSize={25}>
-            <div className="flex h-full items-center justify-center p-6">
-              <span className="font-semibold">Two</span>
-            </div>
-          </ResizablePanel>
-          <ResizableHandle />
-          <ResizablePanel defaultSize={75}>
-            <div className="flex h-full items-center justify-center p-6">
-              <span className="font-semibold">Three</span>
-            </div>
-          </ResizablePanel>
-        </ResizablePanelGroup>
-      </ResizablePanel>
-      <ResizableHandle /> 
-      <ResizablePanel defaultSize={33}>
-        <div className="flex h-[200px] items-center justify-center p-6">
-          <span className="font-semibold">One</span>
-        </div>
-      </ResizablePanel>
-    </ResizablePanelGroup>
+    // <div className='flex justify-center items-center h-full w-full'>
+      <ResizablePanelGroup
+        direction="horizontal"
+        className="max-w-full rounded-lg border inset-0"
+      >
+        <ResizablePanel defaultSize={33}>
+          <ResizablePanelGroup direction="vertical">
+            <ResizablePanel defaultSize={50}>
+              <div className="flex h-full items-center justify-center p-6">
+                <span className="flex justify-center items-center font-semibold"><Graph_test /></span>
+              </div>
+            </ResizablePanel>
+            <ResizableHandle withHandle />
+            <ResizablePanel defaultSize={50}>
+              <div className="flex h-full items-center justify-center p-6">
+                <span className="font-semibold"><Graph_test /></span>
+              </div>
+            </ResizablePanel>
+          </ResizablePanelGroup>
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+        <ResizablePanel defaultSize={33}>
+          <ResizablePanelGroup direction="vertical">
+            <ResizablePanel defaultSize={50}>
+              <div className="flex h-full items-center justify-center p-6">
+                <span className="font-semibold"><Scatter_type /></span>
+              </div>
+            </ResizablePanel>
+            <ResizableHandle withHandle />
+            <ResizablePanel defaultSize={50}>
+              <div className="flex h-full items-center justify-center p-6">
+                <span className="font-semibold"><Graph_test /></span>
+              </div>
+            </ResizablePanel>
+          </ResizablePanelGroup>
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+        <ResizablePanel defaultSize={33}>
+          <div className="flex h-full items-center justify-center p-6">
+            <span className="flex justify-center items-center font-semibold"><Scatter_type /></span>
+          </div>
+        </ResizablePanel>
+      </ResizablePanelGroup>
+    // </div>
     //ResizableHandle goes where you want to control
     // <div className='grid grid-rows-2 grid-cols-3 min-h-screen max-h-screen'>
     //     <div className='col-start-1 flex justify-center items-center row-start-1 row-span-1 col-span-1 border-2 border-zinc-950 overflow-scroll scrollbar-hide rounded-3xl m-1'>
