@@ -5,6 +5,7 @@ const Db_check = async () => {
   ////////////// NICE Work!! Watch will let us know when a new document is inserted .
   const {db} = await connectToDatabase();
   const res = db.collection("Major_Pro").watch([],{fullDocument : 'updateLookup'});
+  
   res.on("change",(e)=>{
     // Core of the project
     if(e.operationType === 'insert'){
