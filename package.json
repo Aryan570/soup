@@ -13,11 +13,13 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "lucide-react": "^0.331.0",
+    "mongodb": "^6.3.0",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
     "react-resizable-panels": "^2.0.9",
     "recharts": "^2.12.0",
+    "socket.io": "^4.7.4",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7"
   },
