@@ -18,7 +18,7 @@ export default function Home() {
       <div className="container h-5/6 mt-7">
         <Grid_check />
       </div>
-      <Db_check/>
+      {/* <Db_check/> */}
     </div>
   );
 }
