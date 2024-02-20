@@ -17,17 +17,31 @@ import {
 const Grid_check =  () => {
   const [Arr, setArr] = useState([]);
   useEffect(() => {
+     async function get_data() {
+      const fkhell = await fetch('/api/fetchall');
+      const fss = await fkhell.json();
+      // console.log(fss);
+      setArr(fss.arr);
+    }
+    const ar = get_data();
+  }, [])
+  
+  useEffect(() => {
     const socket = io('http://localhost:3002');
     socket.on('connect',()=>{
         console.log("connected from client")
     })
     socket.on('new_data',(data :any)=>{
-       console.log(data.current)
+       let soup : any = Arr.slice();
+       soup.push({current : data.current,voltage : data.voltage});
+      //  console.log(data.current)
+      // console.log(soup)
+      setArr(soup);
     })
     return () => {
       socket.disconnect();
     }
-  }, [])
+  }, [Arr])
   
   // useEffect(() => {
   //   async function testing(){
