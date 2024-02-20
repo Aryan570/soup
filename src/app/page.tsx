@@ -1,5 +1,4 @@
 // import Graph_test from "@/components/Graph_test";
-import Db_check from "@/components/Db_check";
 import Grid_check from "@/components/Grid_check";
 import Navbar from "@/components/Navbar";
 export default function Home() {
@@ -18,7 +17,6 @@ export default function Home() {
       <div className="container h-5/6 mt-7">
         <Grid_check />
       </div>
-      {/* <Db_check/> */}
     </div>
   );
 }

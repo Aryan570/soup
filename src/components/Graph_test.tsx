@@ -1,5 +1,5 @@
 "use client"
-import React, { useId } from 'react'
+import React from 'react'
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 // const data = [
 //     {
@@ -28,7 +28,6 @@ import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } fro
 //     }
 // ]
 const Graph_test = (props :any) => {
-    const charId = useId();
     const data = props.arr;
     return (
         <div>
