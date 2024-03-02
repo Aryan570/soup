@@ -1,5 +1,6 @@
 "use client"
-import React from 'react'
+import { Loader2 } from 'lucide-react';
+import React, { Suspense } from 'react'
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 // const data = [
 //     {
@@ -27,17 +28,19 @@ import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } fro
 //         att3: 3300
 //     }
 // ]
-const Graph_test = (props :any) => {
+const Graph_test = (props: any) => {
     const data = props.arr;
     return (
-        <div>
-            <LineChart id="name" data={data} width={400} height={300}>
-                <Line dataKey="current" />
-                <CartesianGrid stroke='#ccc' />
-                <XAxis dataKey="voltage" />
-                <YAxis />
-            </LineChart>
-        </div>
+        <Suspense fallback={<Loader2/>}>
+            <div>
+                <LineChart id="name" data={data} width={400} height={300}>
+                    <Line dataKey="current" />
+                    <CartesianGrid stroke='#ccc' />
+                    <XAxis dataKey="voltage" />
+                    <YAxis />
+                </LineChart>
+            </div>
+        </Suspense>
     )
 }
 

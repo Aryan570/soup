@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
   console.log('Hello from server');
   async function ch() {
     const { db } = await connectToDatabase();
-    const res = db.collection("Major_Pro").watch([], { fullDocument: 'updateLookup' });
+    const res = db.collection("readings").watch([], { fullDocument: 'updateLookup' });
     // console.log(res)
     res.on("change", (e) => {
       // Core of the project
@@ -27,8 +27,8 @@ io.on('connection', (socket) => {
         // console.log(e.fullDocument);
         let current = e.fullDocument.current;
         let voltage = e.fullDocument.voltage;
-        socket.emit('new_data', { current, voltage });
-        // console.log(current, voltage)
+        let power = e.fullDocument.power;
+        socket.emit('new_data', { current, voltage ,power});
         // console.log(fkk)
         // fkk.push({e.fullDocument.current,e.fullDocument.voltage});
       }
