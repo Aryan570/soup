@@ -6,16 +6,11 @@ const Graph_test = dynamic(() => import('./Graph_test'), { ssr: false })
 const Scatter_type = dynamic(() => import('./Scatter_type'), { ssr: false })
 const Display_energy = dynamic(() => import('./Display_energy'), { ssr: false })
 import io from 'socket.io-client'
-// import Graph_test from './Graph_test'
-// import Scatter_type from './Scatter_type'
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
-// import Display_energy from './Display_energy'
-// import { connectToDatabase } from '@/lib/mongodb'
-// import { Socket } from 'socket.io-client'
 const Grid_check =  () => {
   const [Arr, setArr] = useState([]);
   const [Pwr,setPwr] = useState({});
@@ -46,7 +41,6 @@ const Grid_check =  () => {
   }, [Arr])
   
   return (
-    // <div className='flex justify-center items-center h-full w-full'>
       <ResizablePanelGroup
         direction="horizontal"
         className="max-w-full rounded-lg border inset-0"
@@ -89,7 +83,6 @@ const Grid_check =  () => {
           </div>
         </ResizablePanel>
       </ResizablePanelGroup>
-    // </div>
     //ResizableHandle goes where you want to control
     // <div className='grid grid-rows-2 grid-cols-3 min-h-screen max-h-screen'>
     //     <div className='col-start-1 flex justify-center items-center row-start-1 row-span-1 col-span-1 border-2 border-zinc-950 overflow-scroll scrollbar-hide rounded-3xl m-1'>

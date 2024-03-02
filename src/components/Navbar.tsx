@@ -10,7 +10,7 @@ const Navbar = () => {
         <div className='flex items-center space-x-8 font-mono font-extralight'>
           <Link className='hover:bg-gray-200 rounded-lg p-1'  href={'/'}>Overview</Link>
           <Link className='hover:bg-gray-200 rounded-lg p-1' href={'/'}>Customers</Link>
-          <Link className='hover:bg-gray-200 rounded-lg p-1' href={'/'}>Settings</Link>
+          <Link className='hover:bg-gray-200 rounded-lg p-1' href={'/about'}>About</Link>
           <Link className='hover:bg-zinc-700 bg-zinc-950 rounded-md py-1 px-3 text-white' href={'/'}><div className='flex'>Login <LogIn/></div></Link>
         </div>
      </div>
