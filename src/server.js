@@ -25,10 +25,8 @@ io.on('connection', (socket) => {
       // Core of the project
       if (e.operationType === 'insert') {
         // console.log(e.fullDocument);
-        let current = e.fullDocument.current;
-        let voltage = e.fullDocument.voltage;
-        let power = e.fullDocument.power;
-        socket.emit('new_data', { current, voltage ,power});
+        // socket.emit('new_data', { current, voltage ,power ,Time});
+        socket.emit('new_data', e.fullDocument);
         // console.log(fkk)
         // fkk.push({e.fullDocument.current,e.fullDocument.voltage});
       }

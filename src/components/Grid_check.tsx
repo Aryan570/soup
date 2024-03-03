@@ -30,8 +30,8 @@ const Grid_check =  () => {
     })
     socket.on('new_data',(data :any)=>{
        let soup : any = Arr.slice();
-       soup.push({current : data.current,voltage : data.voltage , power : data.power});
-       setPwr({current : data.current,voltage : data.voltage , power : data.power});
+       soup.push({current : data.current,voltage : data.voltage , power : data.power , Time: data.Time});
+       setPwr({current : data.current,voltage : data.voltage , power : data.power ,energy:data.energy});
       setArr(soup.slice(-10));
     })
     return () => {
@@ -48,13 +48,13 @@ const Grid_check =  () => {
           <ResizablePanelGroup direction="vertical">
             <ResizablePanel defaultSize={50}>
               <div className="flex h-full items-center justify-center p-6">
-                <span className="flex justify-center items-center font-semibold"><Graph_test arr={Arr} /></span>
+                <span className="flex justify-center items-center font-semibold"><Graph_test arr={Arr} x_label={"Time"} y_label={"current"} /></span>
               </div>
             </ResizablePanel>
             <ResizableHandle withHandle />
             <ResizablePanel defaultSize={50}>
               <div className="flex h-full items-center justify-center p-6">
-                <span className="font-semibold"><Graph_test arr={Arr} /></span>
+                <span className="font-semibold"><Graph_test arr={Arr} x_label={"Time"} y_label={"voltage"} /></span>
               </div>
             </ResizablePanel>
           </ResizablePanelGroup>
@@ -70,7 +70,7 @@ const Grid_check =  () => {
             <ResizableHandle withHandle />
             <ResizablePanel defaultSize={50}>
               <div className="flex h-full items-center justify-center p-6">
-                <span className="font-semibold"><Graph_test arr={Arr} /></span>
+                <span className="font-semibold"><Graph_test arr={Arr} x_label={"Time"} y_label={"power"} /></span>
               </div>
             </ResizablePanel>
           </ResizablePanelGroup>
