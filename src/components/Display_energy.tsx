@@ -36,6 +36,10 @@ const Display_energy = (props: any) => {
                     </div>
                 </div>
                 <div className=' bg-emerald-400 bg-contain rounded-lg text-white p-2 font-bold'>Carbon Footprint : {props.pwr.energy ? (0.85 * (props.pwr.energy/(3600*1000))).toFixed(3) : 0} Kgs of Carbon</div>
+                <div className=' font-bold flex items-center border p-2 w-fit border-emerald-400 rounded-lg'>
+                    Condition : 
+                    <div className={`w-4 h-4 ${parseInt(props.pwr.voltage) > 240 ? 'bg-red-400' : 'bg-emerald-400'} mx-2 rounded-lg`} color='red'></div>
+                </div>
             </div>
         </Suspense>
     )

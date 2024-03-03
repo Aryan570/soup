@@ -26,7 +26,7 @@ const Area_type = (props: any) => {
                     {/* <Tooltip content={(props) => customTooltip(props)}/> */}
                     <Tooltip/>
                     <XAxis dataKey={props.x_label} label={{value:`${props.x_label}`,position:"insideBottom",offset:"1"}}/>
-                    <YAxis dataKey={props.y_label} label={{value:`${props.y_label}`,angle:-90,position:"insideLeft"}}/>
+                    <YAxis type='number' dataKey={parseFloat(props.y_label)} domain={[0,(dataMax : number) => (dataMax*(1.5))]} label={{value:`${props.y_label}`,angle:-90,position:"insideLeft"}} />
                     {/* <Legend/> */}
                 </AreaChart>
                 </ResponsiveContainer>

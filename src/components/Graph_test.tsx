@@ -52,7 +52,7 @@ const Graph_test = (props: any) => {
                     {/* <Tooltip content={(props) => customTooltip(props)}/> */}
                     <Tooltip/>
                     <XAxis dataKey={props.x_label}/>
-                    <YAxis dataKey={props.y_label} label={{value:`${props.y_label}`,angle:-90,position:"insideLeft"}}/>
+                    <YAxis type='number' dataKey={parseFloat(props.y_label)} domain={[0,(dataMax : number) => (dataMax*2)]} label={{value:`${props.y_label}`,angle:-90,position:"insideLeft"}}/>
                     <Legend/>
                 </LineChart>
                 </ResponsiveContainer>
