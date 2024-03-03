@@ -19,7 +19,7 @@ const About = () => {
                     </p>
                     <p className="text-gray-700 mt-2">
                         All secrets of our project can be found here: {' '}
-                        <Link href={'https://github.com/Aryan570/soup'} className='underline text-emerald-300'>Source Code</Link>
+                        <Link target='_blank' href={'https://github.com/Aryan570/soup'} className='underline text-emerald-300'>Source Code</Link>
                         .
                     </p>
                 </div>

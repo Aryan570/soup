@@ -47,7 +47,7 @@ const Graph_test = (props: any) => {
             <div className='text-xs font-mono'>
                 <ResponsiveContainer width={400} height={300}>
                 <LineChart id="name" data={data} width={400} height={300}>
-                    <Line dataKey={props.y_label} />
+                    <Line stroke={props.y_label == "current" ? "red" : "#00b7eb"} type={'natural'} dataKey={props.y_label} />
                     <CartesianGrid stroke='#ccc' />
                     {/* <Tooltip content={(props) => customTooltip(props)}/> */}
                     <Tooltip/>

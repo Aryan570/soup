@@ -11,6 +11,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
+import Area_type from './Area_type'
 const Grid_check =  () => {
   const [Arr, setArr] = useState([]);
   const [Pwr,setPwr] = useState({});
@@ -64,7 +65,7 @@ const Grid_check =  () => {
           <ResizablePanelGroup direction="vertical">
             <ResizablePanel defaultSize={50}>
               <div className="flex h-full items-center justify-center p-6">
-                <span className="font-semibold"><Scatter_type /></span>
+                <span className="font-semibold"><Area_type arr={Arr} x_label={"voltage"} y_label={"current"}/></span>
               </div>
             </ResizablePanel>
             <ResizableHandle withHandle />
