@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { LogIn } from 'lucide-react'
 const Navbar = () => {
   return (
-    <nav className='sticky h-14 inset-x-0 top-0 pt-2 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-sm transition-all'>
+    <nav className='sticky h-14 inset-x-0 top-0 pt-2 z-30 w-full border-b border-gray-200 bg-transparent  backdrop-blur-sm transition-all'>
      <div className='flex justify-around items-center'>
         <Image src="/plug.png" width={40} height={40} alt='Soup.' />
         <div className='flex items-center space-x-8 font-mono font-extralight'>
@@ -19,3 +19,4 @@ const Navbar = () => {
 }
 
 export default Navbar
+// bg-white/75

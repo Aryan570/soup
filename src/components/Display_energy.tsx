@@ -15,9 +15,9 @@ const Display_energy = (props: any) => {
                     </tr>
                     <tr>
                         <td>First</td>
-                        {/* <td>{props.current}</td>
-                        <td>{props.voltage}</td>
-                        <td>{props.power}</td> */}
+                        {/* <td>{props.pwr.current ? props.pwr.current : 0}</td>
+                        <td>{props.pwr.voltage ? props.pwr.voltage : 0}</td>
+                        <td>{props.pwr.power ? props.pwr.power : 0}</td> */}
                         <td>1</td>
                         <td>2</td>
                         <td>3</td>

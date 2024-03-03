@@ -1,7 +1,7 @@
 "use client"
 import { Loader2 } from 'lucide-react';
 import React, { Suspense } from 'react'
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 // const data = [
 //     {
 //         name: "Power",
@@ -36,6 +36,7 @@ const Graph_test = (props: any) => {
                 <LineChart id="name" data={data} width={400} height={300}>
                     <Line dataKey="current" />
                     <CartesianGrid stroke='#ccc' />
+                    <Tooltip/>
                     <XAxis dataKey="voltage" />
                     <YAxis />
                 </LineChart>

@@ -18,8 +18,7 @@ const Grid_check =  () => {
      async function get_data() {
       const fkhell = await fetch('/api/fetchall');
       const fss = await fkhell.json();
-      // console.log(fss);
-      setArr(fss.arr);
+      setArr(fss.arr.reverse());
     }
     const ar = get_data();
   }, [])
@@ -33,7 +32,7 @@ const Grid_check =  () => {
        let soup : any = Arr.slice();
        soup.push({current : data.current,voltage : data.voltage , power : data.power});
        setPwr({current : data.current,voltage : data.voltage , power : data.power});
-      setArr(soup);
+      setArr(soup.slice(-10));
     })
     return () => {
       socket.disconnect();
