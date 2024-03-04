@@ -1,11 +1,11 @@
 "use client"
 import { Loader2 } from 'lucide-react';
-import React, { BaseSyntheticEvent, Suspense, useState } from 'react'
+import React, { BaseSyntheticEvent, Suspense, useEffect, useState } from 'react'
 
 const Display_energy = (props: any) => {
     const [Cost, setCost] = useState(10);
     const [Budget,setBudget] = useState(10);
-    const [msg,setMsg] = useState(true);
+    const [msg,setMsg] = useState(false);
     function handleChange(e: BaseSyntheticEvent) {
         setCost(e.target.value)
     }
@@ -13,6 +13,14 @@ const Display_energy = (props: any) => {
         setBudget(e.target.value)
     }
     let check = props.pwr.enery ? props.pwr.energy : 0;
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setMsg(true);
+      }, 10000);
+      return () => {
+        clearTimeout(timer);
+      }
+    }, [])
     if((((check*Cost)/(3600 *1000 *Budget))*100 >= 100) && msg){
             fetch('/api/send-mail', {
             method: 'POST',
@@ -31,26 +39,6 @@ const Display_energy = (props: any) => {
           })
           setMsg(false);
     }
-    // useEffect(() => {
-    //     fetch('/api/send-mail', {
-    //         method: 'POST',
-    //         headers: {
-    //           'Accept': 'application/json, text/plain, */*',
-    //           'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({})
-            
-    //       }).then((res) => {
-    //         console.log('Response received',res)
-    //         if (res.status === 250) {
-    //           console.log('Response succeeded!')
-              
-    //         }
-    //       })
-    
-    // }, [])
-    
-    
     return (
         <Suspense fallback={<Loader2 />}>
             <div className='text-sm font-light font-mono space-y-2'>
