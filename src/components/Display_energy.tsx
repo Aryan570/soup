@@ -5,12 +5,52 @@ import React, { BaseSyntheticEvent, Suspense, useState } from 'react'
 const Display_energy = (props: any) => {
     const [Cost, setCost] = useState(10);
     const [Budget,setBudget] = useState(10);
+    const [msg,setMsg] = useState(true);
     function handleChange(e: BaseSyntheticEvent) {
         setCost(e.target.value)
     }
     function handleBudget(e : BaseSyntheticEvent){
-        setBudget((Cost/e.target.value)*100);
+        setBudget(e.target.value)
     }
+    let check = props.pwr.enery ? props.pwr.energy : 0;
+    if((((check*Cost)/(3600 *1000 *Budget))*100 >= 100) && msg){
+            fetch('/api/send-mail', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+            
+          }).then((res) => {
+            console.log('Response received',res)
+            if (res.status === 250) {
+              console.log('Response succeeded!')
+              
+            }
+          })
+          setMsg(false);
+    }
+    // useEffect(() => {
+    //     fetch('/api/send-mail', {
+    //         method: 'POST',
+    //         headers: {
+    //           'Accept': 'application/json, text/plain, */*',
+    //           'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({})
+            
+    //       }).then((res) => {
+    //         console.log('Response received',res)
+    //         if (res.status === 250) {
+    //           console.log('Response succeeded!')
+              
+    //         }
+    //       })
+    
+    // }, [])
+    
+    
     return (
         <Suspense fallback={<Loader2 />}>
             <div className='text-sm font-light font-mono space-y-2'>
@@ -30,10 +70,10 @@ const Display_energy = (props: any) => {
                     </tr>
                 </table>
                 <div className='space-y-1'>
-                    <p className='pl-1'>Cost of 1 unit</p>
+                    <p className='pl-1 font-bold text-xs'>Cost of 1 unit</p>
                     <div className='flex items-center'>
                         <input type='number' onChange={handleChange} id='cost' name='cost' defaultValue={Cost} className='rounded-lg p-2 border border-emerald-400 bg-transparent focus:ring-0 focus:outline-none focus:border-emerald-300 mr-2' required />
-                        <div className='font-bold'>
+                        <div className='font-bold text-xs'>
                             <p>Cost(Rs)</p>
                             <p>{props.pwr.energy ? ((props.pwr.energy * Cost) / (3600 * 1000)).toFixed(3) : 0}</p>
                         </div>
@@ -66,13 +106,13 @@ const Display_energy = (props: any) => {
                         <th>Budget</th>
                     </tr>
                     <tr>
-                        <td>{parseInt(props.pwr.voltage) > 220 || parseInt(props.pwr.voltage) <150 ? props.pwr.volatge > 240 ? <div className='text-rose-500 p-1 rounded-lg text-xs font-bold'>High</div> : <div className='text-rose-500 p-1 rounded-lg text-xs font-bold'>Low</div> : <div className='p-1 rounded-lg text-emerald-400 text-xs font-bold'>Normal</div>}</td>
+                        <td>{parseInt(props.pwr.voltage) > 240 || parseInt(props.pwr.voltage) <150 ? props.pwr.volatge > 240 ? <div className='text-rose-500 p-1 rounded-lg text-xs font-bold'>High</div> : <div className='text-rose-500 p-1 rounded-lg text-xs font-bold'>Low</div> : <div className='p-1 rounded-lg text-emerald-400 text-xs font-bold'>Normal</div>}</td>
                         <td>{parseInt(props.pwr.current) > 5 ? <div className='text-rose-500 p-1 rounded-lg text-xs font-bold'>Abnormal</div> : <div className=' p-1 rounded-lg text-emerald-400 text-xs font-bold'>Normal</div>}</td>
-                        <td>{Budget > 80 ? <div className='text-xs p-1 rounded-lg font-bold text-rose-500'>{Budget.toFixed(3)}%</div> : <div className='text-xs p-1 rounded-lg font-bold text-emerald-400'>{Budget.toFixed(3)}%</div>}</td>
+                        <td>{((check*Cost)/(3600 *1000 *Budget))*100 > 80 ? <div className='text-xs p-1 rounded-lg font-bold text-rose-500'>{props.pwr.energy ? (((((props.pwr.energy * Cost) / (3600 * 1000* Budget))))*100).toFixed(3) : 0}%</div> : <div className='text-xs p-1 rounded-lg font-bold text-emerald-400'>{props.pwr.energy ? (((((props.pwr.energy * Cost) / (3600 * 1000 * Budget))))*100).toFixed(3) : 0}%</div>}</td>
                     </tr>
                 </table>
-                {Budget > 80 && Budget <100 ? <div className='text-xs rounded-lg text-amber-400 font-bold'>About to react the Budget limit</div> : <div></div>}
-                {Budget >= 100? <div className='text-xs rounded-lg text-rose-500 font-bold'>Budget limit has been crossed!</div> : <div></div>}
+                {((check*Cost)/(3600 *1000 *Budget))*100 > 80 && ((check*Cost)/(3600 *1000 *Budget))*100 <100 ? <div className='text-xs rounded-lg text-amber-400 font-bold'>About to react the Budget limit</div> : <div></div>}
+                {((check*Cost)/(3600 *1000 *Budget))*100 >= 100? <div className='text-xs rounded-lg text-rose-500 font-bold'>Budget limit has been crossed!</div> : <div></div>}
             </div>
         </Suspense>
     )
