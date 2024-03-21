@@ -1,3 +1,8 @@
+Real-time smart energy monitoring system. Get the power consumption trends from your appliances and get the alerts when crossing the set budget and Voltage fluctuations as well.
+The remaining part is user-profiles and Login.
+![curr](https://github.com/Aryan570/soup/assets/91080682/711ce46b-b807-4dff-bebd-3b120260ce0a)
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
