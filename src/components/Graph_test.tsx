@@ -2,32 +2,6 @@
 import { Loader2 } from 'lucide-react';
 import React, { Suspense } from 'react'
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-// const data = [
-//     {
-//         name: "Power",
-//         att1: 1500,
-//         att2: 2000,
-//         att3: 3000
-//     },
-//     {
-//         name: "Power2",
-//         att1: 2500,
-//         att2: 3000,
-//         att3: 4000
-//     },
-//     {
-//         name: "Power3",
-//         att1: 5500,
-//         att2: 2000,
-//         att3: 3000
-//     },
-//     {
-//         name: "Power4",
-//         att1: 1200,
-//         att2: 2500,
-//         att3: 3300
-//     }
-// ]
 // const customTooltip = ({ active, payload, label } : any) => {
 //     if (active && payload && payload.length) {
 //         return (

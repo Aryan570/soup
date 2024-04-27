@@ -2,7 +2,6 @@ import { connectToDatabase } from '@/lib/mongodb'
 import React from 'react'
 
 const Db_check = async () => {
-  ////////////// NICE Work!! Watch will let us know when a new document is inserted .
   const {db} = await connectToDatabase();
 //   const res = db.collection('Major_Pro').find();
 //   const ff = await res.toArray()
