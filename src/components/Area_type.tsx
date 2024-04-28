@@ -4,7 +4,6 @@ import React, { Suspense } from 'react'
 import { CartesianGrid, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis ,AreaChart, Area} from 'recharts'
 const Area_type = (props: any) => {
     const data = props.arr;
-    console.log(props.y_label.substring(0,3),data);
     return (
         <Suspense fallback={<Loader2/>}>
             <div className='text-xs font-mono'>

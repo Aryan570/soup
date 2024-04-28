@@ -19,8 +19,8 @@ export default function Avat() {
             <AvatarFallback>SS</AvatarFallback>
           </Avatar>
           <div className="space-y-1">
-            <h4 className="text-sm font-semibold">@aryan_570</h4>
-            <p className="text-sm">The Soup Dashboard – created and maintained by @vercel.</p>
+            <h4 className="text-sm font-semibold">@user_1</h4>
+            <p className="text-sm">The Soup Dashboard – created and maintained by @aryan_570.</p>
             <div className="flex items-center pt-2">
               <CalendarDaysIcon className="mr-2 h-4 w-4 opacity-70" />
               <span className="text-xs text-gray-500 dark:text-gray-400">Joined December 2023</span>
