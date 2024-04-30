@@ -1,5 +1,4 @@
 Real-time smart energy monitoring system. Get the power consumption trends from your appliances and get the alerts when crossing the set budget and Voltage fluctuations as well.
-The remaining part is user-profiles and Login.
 ![soup1](https://github.com/Aryan570/soup/assets/91080682/3bedb905-fa71-45df-a018-c72944f8fcb5)
 
 ![github_progress](https://github.com/Aryan570/soup/assets/91080682/b5f2ecbe-b9b1-4183-9a93-9ed4a5fe1778)
