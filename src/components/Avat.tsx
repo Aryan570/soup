@@ -3,7 +3,7 @@ import { HoverCardTrigger, HoverCardContent, HoverCard } from "@/components/ui/h
 interface CalendarDaysIconProps {
   className?: string;
 }
-export default function Avat() {
+export default function Avat(props : {username : string}) {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
@@ -19,7 +19,7 @@ export default function Avat() {
             <AvatarFallback>SS</AvatarFallback>
           </Avatar>
           <div className="space-y-1">
-            <h4 className="text-sm font-semibold">@user_1</h4>
+            <h4 className="text-sm font-semibold">@{props.username}</h4>
             <p className="text-sm">The Soup Dashboard – created and maintained by @aryan_570.</p>
             <div className="flex items-center pt-2">
               <CalendarDaysIcon className="mr-2 h-4 w-4 opacity-70" />
