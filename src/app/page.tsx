@@ -1,6 +1,5 @@
 // import Graph_test from "@/components/Graph_test";
 import Grid_check from "@/components/Grid_check";
-import Navbar from "@/components/Navbar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import { redirect } from 'next/navigation'
@@ -30,9 +29,8 @@ export default async function Home() {
             className='relative aspect-[1155/500] translate-x-40 -translate-y-56 rotate-[30deg] bg-gradient-to-b from-rose-400 via-pink-400 to-rose-400 left-[calc(50%-30rem)] w-[72.1875rem] opacity-40' />
         </div>
       </div>
-      <Navbar username={session.name}/>
-      <div className="container h-5/6 mt-7">
-        <Grid_check />
+      <div className="h-5/6">
+        <Grid_check username={session.name}/>
       </div>
     </div>
   );

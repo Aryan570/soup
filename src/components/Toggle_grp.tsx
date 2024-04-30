@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -32,16 +32,18 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { useForm } from "react-hook-form"
+import { toast } from './ui/use-toast'
 const formSchema = z
     .object({
         device_name: z.string().min(2, {
             message: "name must be at least 2 characters.",
         }),
     });
-const Toggle_grp = () => {
+const Toggle_grp = ({s_curr_active} : {s_curr_active: Dispatch<SetStateAction<string>>}) => {
     const [options, setoptions] = useState(["Bulb", "Lamp"]);
-    function handlechange(e: String) {
+    function handlechange(e: any) {
         // future work
+        s_curr_active(e);
         console.log(e);
     }
     const form = useForm<z.infer<typeof formSchema>>({
@@ -51,31 +53,47 @@ const Toggle_grp = () => {
         },
     })
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        setoptions([...options,values.device_name]);
-        form.reset();
+        if (!options.includes(values.device_name)){
+            await fetch('/api/new_collec', {
+                method: 'POST',
+                body: JSON.stringify(values.device_name),
+            })
+            setoptions([...options, values.device_name]);
+            form.reset();
+        }else{
+            toast({
+                title: "Device already exists:",
+                description: (
+                    <pre className="mt-2 w-[340px] rounded-md p-4 bg-red-600 font-mono">
+                        <code className="text-white">name: {values.device_name}</code>
+                    </pre>
+                ),
+            })
+        }
+
     }
     return (
-        <div className='font-mono font-extrabold text-sm'>
+        <div className='font-mono font-extrabold text-base'>
             <Select onValueChange={handlechange}>
                 <SelectTrigger className="w-[180px]">
                     <SelectValue defaultValue="Bulb" placeholder="Devices" />
                 </SelectTrigger>
-                <SelectContent className='font-mono font-extrabold text-sm'>
+                <SelectContent className='font-mono font-extrabold'>
                     {options.map((device) =>
                         <SelectItem key={device} value={device}>{device}</SelectItem>
                     )}
                     {/* <SelectItem value="add"><Add_device/></SelectItem> */}
                     {/* <Add_device key={"add"}/> */}
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className=" ">
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="font-mono">
                             <Sheet >
                                 <SheetTrigger asChild>
                                     <Button className="w-full" variant="outline"> + </Button>
                                 </SheetTrigger>
                                 <SheetContent>
                                     <SheetHeader>
-                                        <SheetTitle>Add new device</SheetTitle>
-                                        <SheetDescription>
+                                        <SheetTitle className='font-mono'>Add new device</SheetTitle>
+                                        <SheetDescription className='font-mono'>
                                             Add a new device to dashboard. Click save when you&apos;re done.
                                         </SheetDescription>
                                     </SheetHeader>
@@ -85,9 +103,9 @@ const Toggle_grp = () => {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormControl>
-                                                    <div className="grid gap-4 py-4">
+                                                    <div className="grid gap-4 py-4 font-mono">
                                                         <div className="grid grid-cols-4 items-center gap-4">
-                                                            <Label htmlFor="title" className="text-right">
+                                                            <Label htmlFor="device_name" className="text-right">
                                                                 Device
                                                             </Label>
                                                             <Input placeholder="device" className="col-span-3" {...field} />
@@ -100,7 +118,7 @@ const Toggle_grp = () => {
                                     />
                                     <SheetFooter>
                                         <SheetClose asChild>
-                                            <form><Button type="submit" >Save changes</Button></form>
+                                            <form><Button type="submit" className='font-mono' >Save changes</Button></form>
                                         </SheetClose>
                                     </SheetFooter>
                                 </SheetContent>
