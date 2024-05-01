@@ -8,7 +8,8 @@ export async function POST(request: Request) {
   let {db} = await connectToDatabase();
   const res = await db.collection("users").insertOne({
     name: justBody.username,
-    password: pass
+    password: pass,
+    devices : ["bulb"]
   })
   return NextResponse.json({res,pass})
 }

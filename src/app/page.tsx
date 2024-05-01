@@ -8,6 +8,9 @@ export default async function Home() {
   if(!session){
     redirect('/login');
   }
+  let devices = session.devices;
+  // console.log(session.devices,typeof a);
+  
   // Override console.error
   // This is a hack to suppress the warning about missing defaultProps in recharts library as of version 2.12
   // @link https://github.com/recharts/recharts/issues/3615
@@ -30,7 +33,7 @@ export default async function Home() {
         </div>
       </div>
       <div className="h-5/6">
-        <Grid_check username={session.name}/>
+        <Grid_check username={session.name} devices = {devices}/>
       </div>
     </div>
   );

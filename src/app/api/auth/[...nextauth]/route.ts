@@ -22,10 +22,14 @@ export const authOptions = {
     },
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
-        async jwt({ token,user }: any) {
+        async jwt({ token,trigger,user,session }: any) {
+            if (trigger === "update" && session) {
+                token.devices = session.devices
+            }
             if(user){
               token  = user
             }
+            // console.log(token,trigger,user,session?.devices);
             return {...token,...user};
         },
          async session ({ session, token }:any){

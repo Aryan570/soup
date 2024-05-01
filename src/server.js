@@ -3,9 +3,6 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 const httpServer = http.createServer();
 const { connectToDatabase } = require('./lib/mongodb');
-// async function check(){
-//   const {db} = await connectToDatabase();
-// }
 const io = new Server(httpServer, {
   cors: {
     origin: "http://localhost:3000",
@@ -14,12 +11,21 @@ const io = new Server(httpServer, {
     credentials: true,
   },
 });
-
+let collec = "bulb";
 io.on('connection', (socket) => {
   console.log('Hello from server');
+  socket.on("collec_name",(name)=>{
+    console.log("listening for collection - ",name);
+    collec = name;
+    // if (name.toLowerCase() == "bulb"){
+    //   console.log("Im here");
+    //   collec = "readings";
+    // }
+    ch();
+  })
   async function ch() {
     const { db } = await connectToDatabase();
-    const res = db.collection("readings").watch([], { fullDocument: 'updateLookup' });
+    const res = db.collection(collec).watch([], { fullDocument: 'updateLookup' });
     // console.log(res)
     res.on("change", (e) => {
       // Core of the project

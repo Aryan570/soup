@@ -86,7 +86,7 @@ const Login_Form = () => {
               <FormItem>
                 <FormLabel className='text-base'>Username</FormLabel>
                 <FormControl>
-                  <Input className='text-base bg-lime-100' placeholder="Aryan" {...field} />
+                  <Input className='text-base bg-white' placeholder="Aryan" {...field} />
                 </FormControl>
                 <FormDescription className='text-base'>
                   really? is that your username?
@@ -102,7 +102,7 @@ const Login_Form = () => {
               <FormItem>
                 <FormLabel className='text-base'>Enter Your Password</FormLabel>
                 <FormControl>
-                  <Input className='text-base bg-lime-100' placeholder="Password" {...field} />
+                  <Input className='text-base bg-white' placeholder="Password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

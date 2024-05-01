@@ -33,18 +33,21 @@ import {
 } from "@/components/ui/form"
 import { useForm } from "react-hook-form"
 import { toast } from './ui/use-toast'
+import { useSession } from 'next-auth/react'
 const formSchema = z
     .object({
         device_name: z.string().min(2, {
             message: "name must be at least 2 characters.",
         }),
     });
-const Toggle_grp = ({s_curr_active} : {s_curr_active: Dispatch<SetStateAction<string>>}) => {
-    const [options, setoptions] = useState(["Bulb", "Lamp"]);
-    function handlechange(e: any) {
+const Toggle_grp = ({s_curr_active , devices} : {s_curr_active: Dispatch<SetStateAction<string>>,devices : string[]}) => {
+    const [options, setoptions] = useState(devices);
+    const {update} = useSession();
+    // console.log(update);
+    function handlechange(e: string) {
         // future work
         s_curr_active(e);
-        console.log(e);
+        // console.log(e);
     }
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -58,6 +61,7 @@ const Toggle_grp = ({s_curr_active} : {s_curr_active: Dispatch<SetStateAction<st
                 method: 'POST',
                 body: JSON.stringify(values.device_name),
             })
+            update({devices : [...options,values.device_name]});
             setoptions([...options, values.device_name]);
             form.reset();
         }else{
@@ -76,7 +80,7 @@ const Toggle_grp = ({s_curr_active} : {s_curr_active: Dispatch<SetStateAction<st
         <div className='font-mono font-extrabold text-base'>
             <Select onValueChange={handlechange}>
                 <SelectTrigger className="w-[180px]">
-                    <SelectValue defaultValue="Bulb" placeholder="Devices" />
+                    <SelectValue defaultValue="bulb" placeholder="Devices" />
                 </SelectTrigger>
                 <SelectContent className='font-mono font-extrabold'>
                     {options.map((device) =>
@@ -86,11 +90,11 @@ const Toggle_grp = ({s_curr_active} : {s_curr_active: Dispatch<SetStateAction<st
                     {/* <Add_device key={"add"}/> */}
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="font-mono">
-                            <Sheet >
+                            <Sheet>
                                 <SheetTrigger asChild>
                                     <Button className="w-full" variant="outline"> + </Button>
                                 </SheetTrigger>
-                                <SheetContent>
+                                <SheetContent className='backdrop-blur-lg'>
                                     <SheetHeader>
                                         <SheetTitle className='font-mono'>Add new device</SheetTitle>
                                         <SheetDescription className='font-mono'>

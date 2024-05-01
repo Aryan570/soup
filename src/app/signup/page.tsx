@@ -86,7 +86,7 @@ const SignUp = () => {
                             <FormItem>
                                 <FormLabel className='text-base'>Username</FormLabel>
                                 <FormControl>
-                                    <Input className='text-base' placeholder="Aryan" {...field} />
+                                    <Input className='text-base bg-white' placeholder="enter username" {...field} />
                                 </FormControl>
                                 <FormDescription className='text-base'>
                                     This is your public display name.
@@ -102,7 +102,7 @@ const SignUp = () => {
                             <FormItem>
                                 <FormLabel className='text-base'>Set Password</FormLabel>
                                 <FormControl>
-                                    <Input className='text-base' placeholder="Password" {...field} />
+                                    <Input className='text-base bg-white' placeholder="Password" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -115,7 +115,7 @@ const SignUp = () => {
                             <FormItem>
                                 <FormLabel className='text-base'>Confirm Password</FormLabel>
                                 <FormControl>
-                                    <Input className='text-base' placeholder="Confirm Password" {...field} />
+                                    <Input className='text-base bg-white' placeholder="Confirm Password" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

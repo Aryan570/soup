@@ -11,10 +11,10 @@ import {
 } from "@/components/ui/resizable"
 import Area_type from './Area_type'
 import Navbar from './Navbar'
-const Grid_check = (props : any) => {
+const Grid_check = (props : {username : string , devices : string[]}) => {
   const [Arr, setArr] = useState([]);
   const [Pwr, setPwr] = useState({});
-  const [curr_active,setcurr_active] = useState("readings");
+  const [curr_active,setcurr_active] = useState("bulb");
   useEffect(() => {
     async function get_data() {
       const fkhell = await fetch('/api/fetchall',{
@@ -31,6 +31,7 @@ const Grid_check = (props : any) => {
     const socket = io('http://localhost:3002');
     socket.on('connect', () => {
       console.log("connected from client")
+      socket.emit("collec_name",curr_active);
     })
     socket.on('new_data', (data: any) => {
       let soup: any = Arr.slice();
@@ -41,11 +42,11 @@ const Grid_check = (props : any) => {
     return () => {
       socket.disconnect();
     }
-  }, [Arr])
+  }, [Arr,curr_active])
 
   return (
     <>
-    <Navbar username={props.username} s_cur_active={setcurr_active}/>
+    <Navbar username={props.username} s_cur_active={setcurr_active} devices = {props.devices} />
     <div className='flex h-full mt-7 container'>
       <ResizablePanelGroup
         direction="horizontal"
