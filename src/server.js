@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
     //   console.log("Im here");
     //   collec = "readings";
     // }
-    ch();
+    // ch();
   })
   async function ch() {
     const { db } = await connectToDatabase();

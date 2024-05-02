@@ -13,15 +13,15 @@ const Display_energy = (props: any) => {
         setBudget(e.target.value)
     }
     let check = props.pwr.enery ? props.pwr.energy : 0;
-    useEffect(() => {
-      const timer = setTimeout(() => {
-        setMsg(true);
-      }, 10000);
-      return () => {
-        clearTimeout(timer);
-      }
-    }, [])
-    if((((check*Cost)/(3600 *1000 *Budget))*100 >= 100) && msg){
+    // useEffect(() => {
+    //   const timer = setTimeout(() => {
+    //     setMsg(true);
+    //   }, 10000);
+    //   return () => {
+    //     clearTimeout(timer);
+    //   }
+    // }, [])
+    if((((check*Cost)/(3600 *1000 *Budget))*100 >= 100)){
             fetch('/api/send-mail', {
             method: 'POST',
             headers: {
