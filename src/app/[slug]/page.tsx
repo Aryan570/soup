@@ -26,6 +26,7 @@ export default function Device({ params }: { params: { slug: string } }) {
         const eventSource = new EventSource(`/api/watch/${params.slug}`);
         eventSource.onmessage = (event) => {
             const data: Unit = JSON.parse(event.data);
+            // console.log(data);
             let soup: Unit[] = Arr.slice();
             soup.push({
                 current: data.current,

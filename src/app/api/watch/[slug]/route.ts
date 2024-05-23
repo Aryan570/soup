@@ -1,28 +1,51 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method !== 'GET') {
-        res.setHeader('Allow', ['GET']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
-        return;
+export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
+    const slug = params.slug;
+    if (!slug) {
+        return NextResponse.json({ error: 'Slug is required' }, { status: 400 });
     }
-
     const { db } = await connectToDatabase();
-    const collection = db.collection(req.query.slug as string);
+    const collection = db.collection(slug);
     const changeStream = collection.watch([], { fullDocument: 'updateLookup' });
-    res.setHeader('Content-Type', 'text/event-stream');
-    res.setHeader('Cache-Control', 'no-cache');
-    res.setHeader('Connection', 'keep-alive');
-
-    changeStream.on('change', (change : any) => {
-        if (change.operationType === 'insert') {
-            res.write(`data: ${JSON.stringify(change.fullDocument)}\n\n`);
+    const encoder = new TextEncoder();
+    let controllerClosed = false;
+    const stream = new ReadableStream({
+        start(controller) {
+            changeStream.on('change', (change : any) => {
+                if (change.operationType === 'insert') {
+                    const data = `data: ${JSON.stringify(change.fullDocument)}\n\n`;
+                    controller.enqueue(encoder.encode(data));
+                }
+            });
+            changeStream.on('error', (error : any) => {
+                if (!controllerClosed) {
+                    controller.error(error);
+                    controllerClosed = true;
+                }
+            });
+            req.signal.addEventListener('abort', () => {
+                if (!controllerClosed) {
+                    changeStream.close();
+                    controller.close();
+                    controllerClosed = true;
+                }
+            });
+        },
+        cancel() {
+            if (!controllerClosed) {
+                changeStream.close();
+                controllerClosed = true;
+            }
         }
     });
-
-    req.on('close', () => {
-        changeStream.close();
-        res.end();
+    return new NextResponse(stream, {
+        headers: {
+            'Content-Type': 'text/event-stream',
+            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive'
+        }
     });
 }
+
