@@ -2,14 +2,13 @@
 // import Grid_check from "@/components/Grid_check";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import { redirect } from 'next/navigation'
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { signOut } from "next-auth/react";
 import SignOut from "@/components/SignOut";
 import SignIn from "@/components/SignIn";
 import Avat from "@/components/Avat";
+import { ArrowRightIcon, MoveRight } from "lucide-react";
+import Devices_landing from "@/components/Devices_landing";
 export default async function Home() {
   const session = await getServerSession(authOptions);
   // console.log(session);
@@ -32,8 +31,8 @@ export default async function Home() {
           <div className="text-xl font-sans font-bold"><span className="text-rose-400">so</span>up.</div>
           <div className='flex items-center space-x-8  '>
             <Link className=' rounded-lg p-1' href={'/about'}>About</Link>
-            {!session ? <SignIn /> : <SignOut />}
-            <Avat username={session.name} />
+            {!session ? <SignIn head={"Sign In"} /> : <SignOut />}
+            {!session ? <div></div>:<Avat username={session.name} />}
           </div>
         </div>
       </nav>
@@ -48,10 +47,14 @@ export default async function Home() {
       <div className="flex justify-around items-center h-4/5 -z-40">
         {/* first the catchy line then the table of devices*/}
         <div>
-          <h1 className="text-4xl">Real-time Power tracker <br></br> for Home Appliances.</h1>
-          <p className="mt-3">Power tracking has never been this easy.</p>
+          <h1 className="text-4xl">Real-time Power tracker <br></br> for <span className="text-rose-400">Home</span> Appliances.</h1>
+          <p className="mt-3 font-thin text-gray-600">Power tracking has never been this easy.</p>
+          <div className="flex items-center mt-6">
+            <div><SignIn head="Get Started"/></div>
+            <Link className="ml-4" href="https://github.com/Aryan570/soup"><div className="flex items-center text-xs">Learn More <MoveRight className="scale-75"/></div></Link>
+          </div>
         </div>
-        <div className="rounded-2xl overflow-hidden shadow-2xl shadow-rose-200 opacity-90 backdrop-contrast-75"><Image src={"/butlerm.gif"} height={300} width={300} alt="graph"/></div>
+        {!session ? <div className="rounded-2xl overflow-hidden shadow-2xl shadow-rose-200 opacity-90 backdrop-contrast-75"><Image src={"/butlerm.gif"} height={300} width={300} alt="graph"/></div> : <Devices_landing devices={session.devices}/>}
       </div>
       <footer className="bottom-0 absolute bg-gray-900 text-gray-400 w-full">
         <div className="my-5 flex justify-around">
