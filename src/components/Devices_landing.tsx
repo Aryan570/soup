@@ -71,7 +71,7 @@ const Devices_landing = ({ devices }: { devices: string[] }) => {
     }
     return (
         <div className=''>
-            <table className='w-64 rounded-lg bg-rose-100 overflow-hidden text-base'>
+            <table className='w-64 rounded-lg bg-gradient-to-tl from-rose-100 via-pink-200 to-rose-200  overflow-hidden text-base shadow-2xl hover:shadow-rose-400 shadow-rose-300'>
                 <thead>
                     <tr className=' bg-gray-900'>
                         <th className='text-gray-200 px-2 py-2'>Devices</th>
@@ -79,7 +79,7 @@ const Devices_landing = ({ devices }: { devices: string[] }) => {
                 </thead>
                 {opt.map((device) => {
                     return <tr className='hover:cursor-pointer' key={device} onClick={handleClick} >
-                        <td id={device} className='px-2 py-2 border-b-2'>{device}</td>
+                        <td id={device} className='px-2 py-2'>{device}</td>
                     </tr>;
                 })}
             </table>
