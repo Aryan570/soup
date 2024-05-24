@@ -12,6 +12,7 @@ import { redirect } from "next/navigation"
 import Avat from "@/components/Avat"
 import Link from "next/link"
 import SignOut from "@/components/SignOut"
+import { Options } from "@/components/Options"
 const Graph_test = dynamic(() => import('@/components/Graph_test'), { ssr: false })
 const Display_energy = dynamic(() => import('@/components/Display_energy'), { ssr: false })
 interface Unit {
@@ -24,7 +25,7 @@ interface Unit {
 export default function Device({ params }: { params: { slug: string } }) {
     const [Arr, setArr] = useState([] as Unit[]);
     const [Pwr, setPwr] = useState({});
-    const [user, setuser] = useState<undefined | { name: string, devices: string[] }>(undefined);
+    const [user, setuser] = useState<{ name: string, devices: string[] }>();
     useEffect(() => {
         async function ch() {
             const u = await get_user();
@@ -36,7 +37,6 @@ export default function Device({ params }: { params: { slug: string } }) {
         }
         ch();
     }, [])
-
     useEffect(() => {
         async function get_data() {
             const docs = await fetch('/api/fetchall', {
@@ -74,8 +74,9 @@ export default function Device({ params }: { params: { slug: string } }) {
         <div className=" min-h-screen h-screen overflow-hidden font-mono font-extrabold text-sm">
             <nav className="backdrop-blur-lg mt-3 pb-3 border-b-[1px] z-10">
                 <div className="flex justify-around">
-                    <div className="text-xl font-sans font-bold flex items-center space-x-2"><span className="text-rose-400">so</span>up. <h1 className="text-4xl font-thin flex items-center">/ <span className="ml-2 text-xl">{params.slug}</span></h1></div>
+                    <div className="text-2xl font-sans font-bold flex items-center space-x-2"><span className="text-rose-400">so</span>up. <h1 className="text-4xl font-thin flex items-center">/ <span className="ml-2 text-xl">{params.slug}</span></h1></div>
                     <div className="flex items-center space-x-8">
+                        {user && <Options active={params.slug} devices={user?.devices as string[]}/>}
                         <Link className=' rounded-lg p-1' href={'/about'}>About</Link>
                         <SignOut/>
                         <Avat username={user?.name as string} />

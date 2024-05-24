@@ -28,7 +28,7 @@ export default async function Home() {
     <div className=" min-h-screen h-screen overflow-hidden font-mono font-extrabold text-sm">
       <nav className="backdrop-blur-lg mt-3 z-10">
         <div className="flex justify-around ">
-          <div className="text-xl font-sans font-bold"><span className="text-rose-400">so</span>up.</div>
+          <div className="text-2xl font-sans font-bold"><span className="text-rose-400">so</span>up.</div>
           <div className='flex items-center space-x-8  '>
             <Link className=' rounded-lg p-1' href={'/about'}>About</Link>
             {!session ? <SignIn head={"Sign In"} /> : <SignOut />}
