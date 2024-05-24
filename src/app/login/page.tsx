@@ -20,6 +20,7 @@ import { Loader2 } from 'lucide-react'
 import compareit from '../hashing/comparePass'
 import { toast } from '@/components/ui/use-toast'
 import Link from 'next/link'
+import action from '../action'
 const formSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
@@ -70,6 +71,7 @@ const Login_Form = () => {
           upass,
           redirect: false
       })
+      await action();
       router.push('/')
     }
     setload(false);
@@ -102,7 +104,7 @@ const Login_Form = () => {
               <FormItem>
                 <FormLabel className='text-base'>Enter Your Password</FormLabel>
                 <FormControl>
-                  <Input className='text-base bg-white' placeholder="Password" {...field} />
+                  <Input type='password' className='text-base bg-white' placeholder="Password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

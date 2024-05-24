@@ -28,6 +28,7 @@ import { Button } from './ui/button'
 import { toast } from './ui/use-toast'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { MoveRight } from 'lucide-react'
 const formSchema = z
     .object({
         device_name: z.string().min(2, {
@@ -44,10 +45,6 @@ const Devices_landing = ({ devices }: { devices: string[] }) => {
             device_name: "",
         },
     })
-    function handleClick(e: BaseSyntheticEvent) {
-        console.log(`/${e.currentTarget.id}`);
-        router.push(`/${e.currentTarget.id}`);
-    }
     async function onSubmit(values: z.infer<typeof formSchema>) {
         if (!opt.includes(values.device_name)) {
             await fetch('/api/new_collec', {
@@ -78,8 +75,8 @@ const Devices_landing = ({ devices }: { devices: string[] }) => {
                     </tr>
                 </thead>
                 {opt.map((device) => {
-                    return <tr className='hover:cursor-pointer' key={device} id={device} onClick={handleClick} >
-                        <td className='px-2 py-2'>{device}</td>
+                    return <tr className='' key={device} id={device} >
+                        <td className='px-2 py-2'><div className='flex items-center justify-between'>{device}<button onClick={()=> router.push(`${device}`)}><MoveRight/></button></div></td>
                     </tr>;
                 })}
             </table>

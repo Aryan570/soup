@@ -1,14 +1,12 @@
 "use client"
 import React from 'react'
 import { Button } from './ui/button'
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const SignIn = (props : {head : string}) => {
-  function handleClick(){
-    redirect('/login');
-  }
+  const router = useRouter();
   return (
-      <Button onClick={handleClick}>{props.head}</Button>
+      <Button onClick={()=> router.push('/login')}>{props.head}</Button>
   )
 }
 

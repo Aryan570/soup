@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import {
     ResizableHandle,
     ResizablePanel,
@@ -8,11 +8,12 @@ import {
 import Area_type from '@/components/Area_type'
 import dynamic from 'next/dynamic'
 import get_user from "@/lib/get_user"
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import Avat from "@/components/Avat"
 import Link from "next/link"
 import SignOut from "@/components/SignOut"
 import { Options } from "@/components/Options"
+import { Loader2 } from "lucide-react"
 const Graph_test = dynamic(() => import('@/components/Graph_test'), { ssr: false })
 const Display_energy = dynamic(() => import('@/components/Display_energy'), { ssr: false })
 interface Unit {
@@ -26,17 +27,19 @@ export default function Device({ params }: { params: { slug: string } }) {
     const [Arr, setArr] = useState([] as Unit[]);
     const [Pwr, setPwr] = useState({});
     const [user, setuser] = useState<{ name: string, devices: string[] }>();
+    const router = useRouter();
     useEffect(() => {
         async function ch() {
             const u = await get_user();
             if (u == undefined) {
-                redirect('/');
+                // redirect('/');
+                router.push('/')
             } else {
                 setuser(u);
             }
         }
         ch();
-    }, [])
+    }, [router])
     useEffect(() => {
         async function get_data() {
             const docs = await fetch('/api/fetchall', {
@@ -71,6 +74,7 @@ export default function Device({ params }: { params: { slug: string } }) {
 
     return (
         // <div>My Post: {params.slug}</div>
+        <Suspense fallback={<Loader2 className="animate-spin h-full min-h-screen"/>}>
         <div className=" min-h-screen h-screen overflow-hidden font-mono font-extrabold text-sm">
             <nav className="backdrop-blur-lg mt-3 pb-3 border-b-[1px] z-10">
                 <div className="flex justify-around">
@@ -129,5 +133,6 @@ export default function Device({ params }: { params: { slug: string } }) {
                 </ResizablePanelGroup>
             </div>
         </div>
+        </Suspense>
     )
 }
