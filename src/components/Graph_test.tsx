@@ -25,9 +25,9 @@ const Graph_test = (props: any) => {
                     <CartesianGrid stroke='#ccc' />
                     {/* <Tooltip content={(props) => customTooltip(props)}/> */}
                     <Tooltip/>
-                    <XAxis dataKey={props.x_label}/>
+                    <XAxis dataKey={props.x_label} label={{value: "Time",position : "insideBottom"}}/>
                     <YAxis type='number' dataKey={parseFloat(props.y_label)} domain={[0,(dataMax : number) => (dataMax*2)]} label={{value:`${props.y_label}`,angle:-90,position:"insideLeft"}}/>
-                    <Legend/>
+                    {/* <Legend/> */}
                 </LineChart>
                 </ResponsiveContainer>
             </div>

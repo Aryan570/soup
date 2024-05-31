@@ -89,7 +89,7 @@ const Grid_check = (props: { username: string, devices: string[] }) => {
               <ResizablePanel defaultSize={50}>
                 <div className="flex h-full items-center justify-center p-6">
                   {/* <span className="font-semibold"><Graph_test arr={Arr} x_label={"Time"} y_label={"voltage"} /></span> */}
-                  <span className="font-semibold"><Pie_type devices={props.devices} data={forpie} bulb = {bulbenergy} /></span>
+                  <span className="font-semibold"><Pie_type /></span>
                 </div>
               </ResizablePanel>
             </ResizablePanelGroup>

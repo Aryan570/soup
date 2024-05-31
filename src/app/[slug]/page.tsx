@@ -14,6 +14,7 @@ import Link from "next/link"
 import SignOut from "@/components/SignOut"
 import { Options } from "@/components/Options"
 import { Loader2 } from "lucide-react"
+import Pie_type from "@/components/Pie_type"
 const Graph_test = dynamic(() => import('@/components/Graph_test'), { ssr: false })
 const Display_energy = dynamic(() => import('@/components/Display_energy'), { ssr: false })
 interface Unit {
@@ -26,13 +27,13 @@ interface Unit {
 export default function Device({ params }: { params: { slug: string } }) {
     const [Arr, setArr] = useState([] as Unit[]);
     const [Pwr, setPwr] = useState({});
-    const [user, setuser] = useState<{ name: string, devices: string[] }>();
+    const [user, setuser] = useState<{ name: string, devices: string[] } | undefined>(undefined);
+    const [changes, setChanges] = useState([] as any);
     const router = useRouter();
     useEffect(() => {
         async function ch() {
             const u = await get_user();
             if (u == undefined) {
-                // redirect('/');
                 router.push('/')
             } else {
                 setuser(u);
@@ -40,6 +41,25 @@ export default function Device({ params }: { params: { slug: string } }) {
         }
         ch();
     }, [router])
+    useEffect(() => {
+        async function get_last() {
+            let soup = [] as any
+            console.log("devices",user?.devices)
+            // while(!user) { }
+            user?.devices.forEach(async element => {
+                const docs = await fetch('/api/get_last', {
+                    method: "POST",
+                    body: JSON.stringify(element)
+                });
+                const doc = await docs.json();
+                console.log("doc -->",doc);
+                soup.push({collection : element , change : {fullDocument : {energy : doc[0]?.energy}}});
+            });
+            setChanges(soup);
+        }
+        get_last();
+    }, [user])
+    
     useEffect(() => {
         async function get_data() {
             const docs = await fetch('/api/fetchall', {
@@ -70,7 +90,24 @@ export default function Device({ params }: { params: { slug: string } }) {
             eventSource.close();
         };
     }, [params.slug, Arr])
-
+    useEffect(() => {
+        const eventSource = new EventSource('/api/pie');
+          eventSource.onmessage = (event) => {
+            const newChange = JSON.parse(event.data);
+            setChanges((prevChanges : any) => {
+                let data = prevChanges.filter((c : any) => c.collection != newChange.collection);
+                return [...data, newChange]
+            });
+          };
+          eventSource.onerror = (error) => {
+            console.error('EventSource failed:', error);
+            eventSource.close();
+          };
+    
+      return () => {
+        eventSource.close();
+      }
+    }, [])
 
     return (
         // <div>My Post: {params.slug}</div>
@@ -102,7 +139,8 @@ export default function Device({ params }: { params: { slug: string } }) {
                             <ResizableHandle />
                             <ResizablePanel defaultSize={50}>
                                 <div className="flex h-full items-center justify-center p-6">
-                                    <span className="font-semibold"><Graph_test arr={Arr} x_label={"Time"} y_label={"voltage"} /></span>
+                                    {/* <span className="font-semibold"><Graph_test arr={Arr} x_label={"Time"} y_label={"voltage"} /></span> */}
+                                    <span className="font-semibold"><Pie_type changes={changes} /></span>
                                     {/* <span className="font-semibold"><Pie_type devices={props.devices} data={forpie} bulb = {bulbenergy} /></span> */}
                                 </div>
                             </ResizablePanel>
