@@ -51,14 +51,14 @@ export default async function Home() {
         <div className="flex justify-around items-center h-4/5 -z-40">
           {/* first the catchy line then the table of devices*/}
           <div>
-            <h1 className="text-4xl">Real-time Power tracker <br></br> for <span className="text-rose-400">Home</span> Appliances.</h1>
+            <h1 className="text-4xl">Real-time Power tracker <br></br> for <span className="text-rose-400">Electrical</span> Appliances.</h1>
             <p className="mt-3 font-thin text-gray-600">Power tracking has never been this easy.</p>
             <div className="flex items-center mt-6">
               <div><SignIn head="Get Started" /></div>
               <Link className="ml-4" href="https://github.com/Aryan570/soup"><div className="flex items-center text-xs">Learn More <MoveRight className="scale-75" /></div></Link>
             </div>
           </div>
-          {!session ? <div className="rounded-2xl overflow-hidden shadow-2xl shadow-rose-200 opacity-90 backdrop-contrast-75"><Image src={"/butlerm.gif"} height={300} width={300} alt="graph" /></div> : <div><Devices_landing devices={session.devices} /></div>}
+          {!session ? <div className="rounded-2xl overflow-hidden shadow-2xl shadow-rose-200 opacity-90 backdrop-contrast-75"><Image src={"/butlerm.gif"} height={300} width={300} alt="graph" /></div> : <Devices_landing devices={session.devices} />}
         </div>
         <footer className="bottom-0 absolute bg-gray-900 text-gray-400 w-full">
           <div className="my-5 flex justify-around">
