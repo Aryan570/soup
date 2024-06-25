@@ -1,7 +1,9 @@
 Real-time smart energy monitoring system. Get the power consumption trends from your appliances and get the alerts when crossing the set budget and Voltage fluctuations as well.
-Working_demo - vid 1 -  [Link2](https://drive.google.com/file/d/11SDujOSCTEM1SRQzVg1RuV-YelkHfCVW/view?usp=sharing)
+Working_demo - 
 
-vid 2 - [Link1](https://drive.google.com/file/d/1rcbbw1xIYRAB4NrAZQwwyfUuPQUdYixJ/view?usp=sharing)
+vid 1 -  [Link](https://drive.google.com/file/d/11SDujOSCTEM1SRQzVg1RuV-YelkHfCVW/view?usp=sharing)
+
+vid 2 - [Link](https://drive.google.com/file/d/1rcbbw1xIYRAB4NrAZQwwyfUuPQUdYixJ/view?usp=sharing)
 ![Landing_page](https://github.com/Aryan570/soup/assets/91080682/1fcd7920-bc81-49c2-9bac-64000faa677b)
 
 ![dash](https://github.com/Aryan570/soup/assets/91080682/21d57ad9-e53e-4170-a740-7ee5011eeccf)
