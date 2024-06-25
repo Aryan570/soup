@@ -1,7 +1,7 @@
 Real-time smart energy monitoring system. Get the power consumption trends from your appliances and get the alerts when crossing the set budget and Voltage fluctuations as well.
-![soup1](https://github.com/Aryan570/soup/assets/91080682/3bedb905-fa71-45df-a018-c72944f8fcb5)
+![Landing_page](https://github.com/Aryan570/soup/assets/91080682/1fcd7920-bc81-49c2-9bac-64000faa677b)
 
-![github_progress](https://github.com/Aryan570/soup/assets/91080682/b5f2ecbe-b9b1-4183-9a93-9ed4a5fe1778)
+![dash](https://github.com/Aryan570/soup/assets/91080682/21d57ad9-e53e-4170-a740-7ee5011eeccf)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
